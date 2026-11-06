@@ -62,7 +62,7 @@ export default function Bookings() {
               <View style={styles.ref}>
                 <View style={{ flex: 1 }}>
                   <T variant="overline" style={{ fontSize: 12 }}>Booking reference</T>
-                  <T variant="label" num style={{ fontFamily: font.bold, letterSpacing: 1 }}>{first.b.id}</T>
+                  <T variant="label" num numberOfLines={1} adjustsFontSizeToFit style={{ fontFamily: font.bold }}>{first.b.id}</T>
                 </View>
                 <LivePill base={12} />
               </View>
@@ -87,7 +87,7 @@ export default function Bookings() {
                       <T variant="label" style={{ fontFamily: font.display, fontSize: 17, flexShrink: 1 }} numberOfLines={1}>{boat.name.split(' - ')[0]}</T>
                       <StatusTag b={b} />
                     </View>
-                    <T variant="caption">{destById(boat.destinationId)?.name ?? boat.location.split(',')[0]} · {boat.location.split(',').pop()?.trim()}</T>
+                    <T variant="caption">{boat.location.split(',')[0]} · {destById(boat.destinationId)?.name ?? boat.location.split(',').pop()?.trim()}</T>
                     <T variant="caption" num>{fmtDay(dep.date)} · {dep.time} {dep.label} · {b.seats} guests</T>
                   </View>
                 </View>

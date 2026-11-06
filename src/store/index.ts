@@ -124,4 +124,7 @@ export const useApp = create<State>((set, get) => ({
   showToast: (toast) => set({ toast }),
 }));
 
+/** When the app process started: bookings made after it read "Just now". */
+export const APP_START = Date.now();
+
 export const partySize = () => guestsOf(useApp.getState().party);

@@ -41,3 +41,4 @@ export type Notice = {
 };
 
 export const SOURCE_LABEL: Record<Source, string> = { pms: 'Operator PMS', agency: 'Agency API', manual: 'Manual calendar', app: 'Tidepass' };
+export const SOURCE_SHORT: Record<Source, string> = { pms: 'PMS', agency: 'Agency', manual: 'Manual', app: 'App' };

@@ -6,7 +6,7 @@ import { Header, IconButton } from '../components/Header';
 import { Icon } from '../components/Icon';
 import { PulseDot, useSyncedAgo } from '../components/Live';
 import { T } from '../components/Text';
-import { SOURCE_LABEL } from '../data/models';
+import { SOURCE_LABEL, SOURCE_SHORT } from '../data/models';
 import { BOATS, FEEDS } from '../data/seed';
 import { TODAY } from '../logic/dates';
 import { heldSeats, seatsLeft } from '../logic/inventory';
@@ -21,9 +21,9 @@ function FeedCard({ source, boats, lag }: (typeof FEEDS)[number]) {
     <View style={styles.feed}>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
         <PulseDot size={6} color={source === 'manual' ? colors.text3 : colors.success} />
-        <T variant="label" style={{ fontFamily: font.semibold, flex: 1 }} numberOfLines={1}>{SOURCE_LABEL[source]}</T>
+        <T variant="label" style={{ fontFamily: font.semibold, flex: 1 }} numberOfLines={1}>{SOURCE_SHORT[source]}</T>
       </View>
-      <T variant="caption" num>{source === 'manual' ? 'Updated by operator' : `Synced ${ago}s ago`}</T>
+      <T variant="caption" num>{source === 'manual' ? 'By operator' : `Synced ${ago}s ago`}</T>
       <T variant="caption" num style={{ color: colors.text, fontFamily: font.semibold }}>{boats} boats</T>
     </View>
   );
@@ -80,9 +80,9 @@ export default function Operator() {
           </View>
         </Card>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 22, marginBottom: 10 }}>
+        <View style={{ marginTop: 22, marginBottom: 10 }}>
           <T variant="title">Fleet live inventory</T>
-          <T variant="caption">Block hides a boat everywhere</T>
+          <T variant="caption">Switch off to block a boat on web, app and admin</T>
         </View>
         {FLEET.map((id) => {
           const b = BOATS.find((x) => x.id === id)!;

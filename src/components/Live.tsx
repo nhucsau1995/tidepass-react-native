@@ -4,7 +4,7 @@ import { colors, font, radius } from '../theme/tokens';
 import { Icon } from './Icon';
 import { T } from './Text';
 
-// One shared 1 s clock for every "synced Ns ago" caption and countdown.
+// One shared 1 s clock for the "synced Ns ago" captions and the hold countdown.
 let second = 0;
 const subs = new Set<() => void>();
 let timer: ReturnType<typeof setInterval> | null = null;
@@ -18,13 +18,17 @@ function subscribe(cb: () => void) {
 }
 export const useSecond = () => useSyncExternalStore(subscribe, () => second);
 
-/** Seconds since the last feed sync: the feed re-syncs every `period` seconds. */
-export const useSyncedAgo = (base: number, period = 15) => (base + useSecond()) % period;
+/** Seconds since the last feed sync: the feed re-syncs every `period` seconds. The caption
+ *  steps every 5 s so a screen full of Live pills is not re-rendered every second. */
+const fiveSecondStep = () => Math.floor(second / 5);
+export const useSyncedAgo = (base: number, period = 15) => (base + useSyncExternalStore(subscribe, fiveSecondStep) * 5) % period;
 
 export function PulseDot({ color = colors.success, size = 8 }: { color?: string; size?: number }) {
   const v = useRef(new Animated.Value(0)).current;
   useEffect(() => {
-    const loop = Animated.loop(Animated.sequence([Animated.timing(v, { toValue: 1, duration: 900, useNativeDriver: true }), Animated.timing(v, { toValue: 0, duration: 900, useNativeDriver: true })]));
+    // Three pulses when the dot appears, then a still dot: an endless loop on every pill keeps
+    // the screen redrawing and slows UI automation on emulators.
+    const loop = Animated.loop(Animated.sequence([Animated.timing(v, { toValue: 1, duration: 900, useNativeDriver: true }), Animated.timing(v, { toValue: 0, duration: 900, useNativeDriver: true })]), { iterations: 3 });
     loop.start();
     return () => loop.stop();
   }, [v]);

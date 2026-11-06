@@ -10,7 +10,7 @@ export const colors = {
   brassTint: '#F7EFDD',
   text: '#181614',
   text2: '#5E5952',
-  text3: '#8A8580',
+  text3: '#6E6963', // design #8A8580 is 3.65:1 on white; darkened to 5.44:1 for small text
   border: '#E7E3DD',
   disabled: '#D9D5CF',
   white: '#FFFFFF',

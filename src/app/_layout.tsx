@@ -18,7 +18,7 @@ export default function RootLayout() {
   }, [loaded]);
   // Operator feeds keep syncing in the background (boats outside the demo path).
   useEffect(() => {
-    const t = setInterval(() => useApp.getState().feedTick(), 9000);
+    const t = setInterval(() => useApp.getState().feedTick(), 30000);
     return () => clearInterval(t);
   }, []);
   if (!loaded) return null;

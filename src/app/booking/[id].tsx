@@ -12,14 +12,13 @@ import { T } from '../../components/Text';
 import { images } from '../../data/images';
 import { boatById, meetingPoint } from '../../data/seed';
 import { addDays, dayNum, fmtDay, fmtShort, money, monthShort } from '../../logic/dates';
-import { useApp } from '../../store';
+import { APP_START, useApp } from '../../store';
 import { colors, font, radius } from '../../theme/tokens';
 
 const fmtMs = (ms: number) => {
   const d = new Date(ms).toISOString().slice(0, 10);
   return `${dayNum(d)} ${monthShort(d)}`;
 };
-const SESSION_START = Date.now();
 
 // 14 Booking detail: reference, status, itinerary timeline, captain, meeting point, change / cancel.
 export default function BookingDetail() {
@@ -32,7 +31,7 @@ export default function BookingDetail() {
   const dep = inv.departures[b.departureId];
   const boat = boatById(dep.boatId);
   const live = b.status === 'confirmed';
-  const booked = b.createdAt >= SESSION_START ? 'Just now' : fmtMs(b.createdAt);
+  const booked = b.createdAt >= APP_START ? 'Just now' : fmtMs(b.createdAt);
   const steps: { icon: IconName; title: string; when: string; sub: string; done: boolean }[] = [
     { icon: 'check', title: 'Booked', when: booked, sub: 'Charter reserved via the Tidepass app', done: true },
     { icon: 'check', title: `Paid ${money(b.total)}`, when: 'Visa 4242', sub: 'Receipt sent by email and SMS', done: true },
@@ -61,7 +60,7 @@ export default function BookingDetail() {
           <Card style={{ padding: 16, marginTop: -8 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <T variant="caption">Booking ref</T>
-              <T variant="label" testID="detail-ref" num style={{ fontFamily: font.bold, letterSpacing: 0.5, flex: 1 }}>{b.id}</T>
+              <T variant="label" testID="detail-ref" num numberOfLines={1} adjustsFontSizeToFit style={{ fontFamily: font.bold, flex: 1 }}>{b.id}</T>
               <Button small kind="secondary" icon="copy" label="Copy" onPress={() => showToast(`${b.id} copied`)} />
             </View>
             <View style={styles.hr} />
