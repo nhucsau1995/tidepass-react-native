@@ -116,9 +116,20 @@ else
   fi
 fi
 
-ffmpeg -y "${TRIM[@]}" -i capture-tmp/ademo.mp4 -vf "fps=12,scale=300:-1:flags=lanczos,palettegen=stats_mode=diff" capture-tmp/pal.png
+# Expo: Maestro records the whole walkthrough. If a slow emulator stretched it past GIF_MAX,
+# speed it up to fit (setpts) instead of cutting the end of the walkthrough off.
+SPEED=""
+if [ "$STACK" = expo ]; then
+  DUR=$(ffprobe -v error -show_entries format=duration -of csv=p=0 capture-tmp/ademo.mp4 || echo 0)
+  if awk -v d="$DUR" -v m="$GIF_MAX" 'BEGIN{exit !(d>m)}'; then
+    SPEED=$(awk -v d="$DUR" -v m="$GIF_MAX" 'BEGIN{printf "setpts=PTS*%.4f,", (m-2)/d}')
+    TRIM=()
+    echo "capture: walkthrough is ${DUR}s, sped up to fit ${GIF_MAX}s"
+  fi
+fi
+ffmpeg -y "${TRIM[@]}" -i capture-tmp/ademo.mp4 -vf "${SPEED}fps=12,scale=300:-1:flags=lanczos,palettegen=stats_mode=diff" capture-tmp/pal.png
 ffmpeg -y "${TRIM[@]}" -i capture-tmp/ademo.mp4 -i capture-tmp/pal.png \
-  -lavfi "fps=12,scale=300:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" screenshots/demo.gif
+  -lavfi "${SPEED}fps=12,scale=300:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" screenshots/demo.gif
 [ -s screenshots/demo.gif ] || { echo "capture: no demo.gif"; exit 1; }
 SIZE=$(stat -c %s screenshots/demo.gif)
 [ "$SIZE" -lt 3145728 ] || echo "capture: warning, demo.gif is $SIZE bytes (> 3 MB)"
