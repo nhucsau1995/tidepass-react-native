@@ -50,3 +50,6 @@ export const shadow = {
   shadowOffset: { width: 0, height: 8 },
   elevation: 3,
 };
+
+// Calendar / availability dots: available, limited (brass), full, no departures.
+export const STATUS_COLOR = { available: colors.success, limited: colors.brass, full: colors.text3, none: colors.border } as const;

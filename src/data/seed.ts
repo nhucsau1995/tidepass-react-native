@@ -134,3 +134,12 @@ export const FEEDS = [
   { source: 'agency' as const, boats: 58, lag: 21 },
   { source: 'manual' as const, boats: 6, lag: 0 },
 ];
+
+// Where guests board, by boat (shown on confirmation and booking detail).
+const MEETING: Record<string, string> = {
+  lagoon380: 'Abell Point Marina, Pier C',
+  blueHorizon: 'Abell Point Marina, Pier A',
+  aurelia: 'King Street Wharf 6, Sydney',
+  vedanta: 'Benoa Harbour, Jetty 2',
+};
+export const meetingPoint = (boatId: string) => MEETING[boatId] ?? `${boatById(boatId).location.split(',')[0]} main jetty`;
