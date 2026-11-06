@@ -28,3 +28,6 @@ export const images = {
 };
 
 export type ImageKey = keyof typeof images;
+
+export const logoMark = require('../../assets/images/logo-mark.png');
+export const logoMarkWhite = require('../../assets/images/logo-mark-white.png');
