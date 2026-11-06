@@ -1,0 +1,77 @@
+# Paced walkthrough for screenshots/demo.gif: 10 taps, about 30 s of script. Maestro records
+# the screen itself (startRecording after the onboarding screen is up), so JVM start-up and the
+# dialog guard are not in the video. No clearState: the warm-up launch already reset the app.
+# The core loop: discover a boat, pick the last seats, lose the race to an operator-system
+# booking, take the live alternative, pay inside the hold, get the booking reference.
+appId: com.tidepass.app
+---
+- launchApp
+- runFlow:
+    when:
+      visible: ".*isn't responding.*"
+    commands:
+      - tapOn: "Wait"
+- extendedWaitUntil:
+    visible: "Get started"
+    timeout: 60000
+- startRecording: demo
+- tapOn:
+    id: "get-started"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Welcome aboard"
+    timeout: 15000
+- tapOn:
+    id: "sign-in"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Good morning, Olivia"
+    timeout: 15000
+- tapOn:
+    id: "dest-whitsundays"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Lagoon 380 - 4 cab."
+    timeout: 15000
+- tapOn:
+    id: "boat-lagoon380"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Vessel specifications"
+    timeout: 15000
+- tapOn:
+    id: "check-availability"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Choose a departure"
+    timeout: 15000
+- tapOn:
+    id: "slot-1330"
+    waitToSettleTimeoutMs: 1500
+- tapOn:
+    id: "hold-seats"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "No seats available"
+    timeout: 15000
+- tapOn:
+    id: "book-alt"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Seats held for you"
+    timeout: 15000
+- tapOn:
+    id: "pay"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "You are on board"
+    timeout: 15000
+- tapOn:
+    id: "view-booking"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Itinerary and schedule"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 2000
+- stopRecording

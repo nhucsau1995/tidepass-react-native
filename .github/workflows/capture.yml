@@ -1,0 +1,84 @@
+name: capture
+
+# Dispatched from the pod by make-poc-pod. Builds a release APK (production JS, no Metro, no
+# dev bubble), drives it with Maestro on a KVM emulator, uploads screenshots + demo GIF as the
+# "capture" artifact. Never commits to the repo.
+# The emulator steps live in .github/scripts/capture-emulator.sh (copied from the skill's
+# templates/): android-emulator-runner runs each `script:` line in its own shell.
+on:
+  workflow_dispatch:
+
+env:
+  APP_ID: com.tidepass.app      # expo.android.package from app.json
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enable KVM
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: android-actions/setup-android@v3
+        with: { packages: platform-tools }   # default also installs legacy "tools", removed from the SDK repo
+
+      - run: npm ci
+
+      - name: Build release APK (expo prebuild + gradle)
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx expo prebuild --platform android --no-install
+          cd android && ./gradlew assembleRelease --no-daemon -q
+          ls -la app/build/outputs/apk/release/
+
+      - name: Install ffmpeg (not preinstalled on ubuntu-latest)
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Maestro
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> "$GITHUB_PATH"
+
+      - name: Capture on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
+          script: bash .github/scripts/capture-emulator.sh expo
+
+      - name: Upload Maestro debug output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maestro-debug
+          path: |
+            maestro-out
+            ~/.maestro/tests
+            capture-tmp/
+          if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: capture
+          path: |
+            screenshots/*.png
+            screenshots/demo.gif
+          if-no-files-found: error

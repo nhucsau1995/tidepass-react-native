@@ -1,0 +1,164 @@
+# Stills for the README: one per key screen, taken at the top of each screen once its content
+# is visible. Real taps on testIDs (no deep links). No clearState: the warm-up launch reset it.
+# Every tap caps the settle wait: Live pills pulse and the hold countdown ticks every second.
+appId: com.tidepass.app
+---
+- launchApp
+- runFlow:
+    when:
+      visible: ".*isn't responding.*"
+    commands:
+      - tapOn: "Wait"
+- extendedWaitUntil:
+    visible: "Get started"
+    timeout: 60000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 01-onboarding
+- tapOn:
+    id: "get-started"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Welcome aboard"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 02-sign-in
+- tapOn:
+    id: "sign-in"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Good morning, Olivia"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 03-explore
+- tapOn:
+    id: "dest-whitsundays"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Lagoon 380 - 4 cab."
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 04-destination
+- tapOn:
+    id: "boat-lagoon380"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Vessel specifications"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 05-boat-detail
+- tapOn:
+    id: "check-availability"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Choose a departure"
+    timeout: 15000
+- tapOn:
+    id: "slot-1330"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Total A\\$620"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 06-availability-calendar
+- tapOn:
+    id: "hold-seats"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "No seats available"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 07-last-seat-taken
+- tapOn:
+    id: "book-alt"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Seats held for you"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 08-checkout-hold
+- tapOn:
+    id: "pay"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "You are on board"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 09-booking-confirmed
+- tapOn:
+    id: "view-booking"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Itinerary and schedule"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 10-booking-detail
+- tapOn:
+    id: "back"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "My trips"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 11-my-trips
+- tapOn:
+    id: "tab-search"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: ".*boats? with space"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 12-search-results
+- tapOn:
+    id: "sdest-tahiti"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Fully booked for this date"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 13-search-fully-booked
+- tapOn:
+    id: "tab-profile"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Operator console"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 14-profile
+- tapOn:
+    id: "open-operator"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Auto-sync on"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 15-operator-console
+- tapOn:
+    id: "back"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Personal details"
+    timeout: 15000
+- tapOn:
+    id: "row-notifications"
+    waitToSettleTimeoutMs: 1500
+- extendedWaitUntil:
+    visible: "Weather cancellation"
+    timeout: 15000
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 16-notifications

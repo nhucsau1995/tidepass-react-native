@@ -5,10 +5,10 @@ import type { Boat, Destination, Notice } from './models';
 export const DESTINATIONS: Destination[] = [
   { id: 'whitsundays', name: 'Whitsundays', country: 'Australia', region: 'Queensland, Coral Sea', fleet: 22, image: 'destWhitsundays' },
   { id: 'bali', name: 'Bali', country: 'Indonesia', region: 'Bali and Lombok', fleet: 31, image: 'destBali' },
+  { id: 'tahiti', name: 'Tahiti', country: 'French Polynesia', region: 'Society Islands', fleet: 9, image: 'destTahiti' },
   { id: 'palawan', name: 'Palawan', country: 'Philippines', region: 'MIMAROPA, Sulu Sea', fleet: 12, image: 'destPalawan' },
   { id: 'fiji', name: 'Fiji', country: 'Fiji', region: 'Mamanuca and Yasawa', fleet: 24, image: 'destFiji' },
   { id: 'singapore', name: 'Singapore', country: 'Singapore', region: 'Sentosa and Southern Islands', fleet: 18, image: 'destSingapore' },
-  { id: 'tahiti', name: 'Tahiti', country: 'French Polynesia', region: 'Society Islands', fleet: 9, image: 'destTahiti' },
   { id: 'maldives', name: 'Maldives', country: 'Maldives', region: 'North Male Atoll', fleet: 15, image: 'destMaldives' },
   { id: 'phuket', name: 'Phuket', country: 'Thailand', region: 'Andaman Sea', fleet: 27, image: 'destPhuket' },
 ];

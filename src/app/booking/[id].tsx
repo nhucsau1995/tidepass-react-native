@@ -23,7 +23,7 @@ const SESSION_START = Date.now();
 
 // 14 Booking detail: reference, status, itinerary timeline, captain, meeting point, change / cancel.
 export default function BookingDetail() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from } = useLocalSearchParams<{ id: string; from?: string }>();
   const insets = useSafeAreaInsets();
   const inv = useApp((s) => s.inv);
   const showToast = useApp((s) => s.showToast);
@@ -47,7 +47,7 @@ export default function BookingDetail() {
           <Image source={images[boat.image]} style={{ width: '100%', height: 260 }} />
           <LinearGradient colors={colors.photoFade} style={StyleSheet.absoluteFill} />
           <View style={[styles.bar, { top: insets.top + 6 }]}>
-            <IconButton icon="arrow-left" label="Back" testID="back" filled onPress={goBack} />
+            <IconButton icon="arrow-left" label="Back" testID="back" filled onPress={from === 'confirmed' ? () => router.dismissTo('/bookings') : goBack} />
             <IconButton icon="heart" label="Save" filled />
           </View>
           <View style={{ position: 'absolute', left: 20, right: 20, bottom: 16, gap: 4 }}>

@@ -23,7 +23,7 @@ export default function Confirmed() {
   if (!b) return null;
   const dep = inv.departures[b.departureId];
   const boat = boatById(dep.boatId);
-  const done = () => router.replace('/bookings');
+  const done = () => router.dismissTo('/bookings');
   const rows: [IconName, string, string][] = [
     ['calendar', `${fmtDay(dep.date)} · ${dep.time} ${dep.label}`, `Duration ${dep.hours} hours · ${b.seats} guests aboard`],
     ['map-pin', meetingPoint(boat.id), boat.location],
@@ -87,7 +87,7 @@ export default function Confirmed() {
           </View>
         </Card>
 
-        <Button testID="view-booking" label="View booking" trailing="arrow-right" onPress={() => router.replace(`/booking/${b.id}`)} style={{ marginTop: 20 }} />
+        <Button testID="view-booking" label="View booking" trailing="arrow-right" onPress={() => router.replace(`/booking/${b.id}?from=confirmed`)} style={{ marginTop: 20 }} />
         <Button kind="secondary" icon="calendar" label="Add to calendar" onPress={() => showToast('Added to your calendar')} style={{ marginTop: 12 }} />
       </ScrollView>
     </View>
