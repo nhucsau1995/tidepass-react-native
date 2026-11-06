@@ -41,7 +41,7 @@ export default function Notifications() {
           <Card style={styles.alert}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
               <Tag label="Weather cancellation" tone="warning" icon="alert-triangle" />
-              <T variant="caption">Thu 6 Nov</T>
+              <T variant="caption">Fri 6 Nov</T>
             </View>
             <View style={{ flexDirection: 'row', gap: 12, marginTop: 12 }}>
               <Thumb image={boatById(weather.boatId!).image} size={64} />

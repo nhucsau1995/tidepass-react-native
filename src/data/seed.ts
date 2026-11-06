@@ -72,6 +72,7 @@ const FIXED: Record<string, number> = {
   'lagoon380|2026-10-18|17:00': 10,
   'lagoon380|2026-10-19|13:30': 6,
   'blueHorizon|2026-10-18|13:30': 5,
+  'aurelia|2026-10-16|10:00': 14,
   'aurelia|2026-10-16|18:00': 12,
   'islandHopper|2026-10-16|08:30': 20,
   'islandHopper|2026-10-16|09:00': 20,
@@ -122,8 +123,8 @@ export function seedInventory(): InventoryState {
 }
 
 export const SEED_NOTICES: Notice[] = [
-  { id: 'n-weather', kind: 'weather', title: 'Weather cancellation - Vedanta', body: 'Strong winds forecast for the Lombok Strait on Thu 6 Nov. Your trip is cancelled and A$960 is refunded to Visa 4242.', when: '2 h ago', unread: true, bookingId: 'TDP-26-1106-2M8P', boatId: 'vedanta' },
-  { id: 'n-seat', kind: 'seat', title: 'A seat opened on Tahiti, Sun 19 Oct', body: 'Moana Nui, Papeete Coastal Cruise - 1 spot available on the catamaran.', when: '12 min ago', unread: true, boatId: 'moanaNui' },
+  { id: 'n-weather', kind: 'weather', title: 'Weather cancellation - Vedanta', body: 'Strong winds forecast for the Lombok Strait on Fri 6 Nov. Your trip is cancelled and A$960 is refunded to Visa 4242.', when: '2 h ago', unread: true, bookingId: 'TDP-26-1106-2M8P', boatId: 'vedanta' },
+  { id: 'n-seat', kind: 'seat', title: 'A seat opened on Tahiti, Mon 19 Oct', body: 'Moana Nui, Papeete Coastal Cruise - 1 spot available on the catamaran.', when: '12 min ago', unread: true, boatId: 'moanaNui' },
   { id: 'n-paid', kind: 'payment', title: 'Charter payment cleared', body: 'Aurelia, Sydney Harbour sunset - A$2,900.', when: '28 Sep', bookingId: 'TDP-26-1213-4H9X' },
 ];
 

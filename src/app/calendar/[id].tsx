@@ -8,7 +8,6 @@ import { IconButton, goBack } from '../../components/Header';
 import { Icon } from '../../components/Icon';
 import { LivePill } from '../../components/Live';
 import { T } from '../../components/Text';
-import { SOURCE_LABEL } from '../../data/models';
 import { DAYS_AHEAD, boatById } from '../../data/seed';
 import { MONTHS_LONG, TODAY, addDays, daysBetween, fmtDay, money, monthGrid } from '../../logic/dates';
 import { dayStatus } from '../../logic/inventory';
@@ -64,7 +63,6 @@ export default function Calendar() {
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }} showsVerticalScrollIndicator={false}>
         <View style={styles.liveRow}>
           <LivePill label="Availability updates live" base={8} style={{ borderWidth: 0, backgroundColor: 'transparent' }} />
-          <T variant="caption" style={{ color: colors.text3 }}>{SOURCE_LABEL[boat.source]}</T>
         </View>
 
         <View style={styles.cal}>

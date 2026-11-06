@@ -71,7 +71,7 @@ export default function BoatDetail() {
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 24, marginBottom: 12 }}>
             <T variant="title">Vessel specifications</T>
-            <T variant="caption">From the operator manifest</T>
+            <T variant="caption">From manifest</T>
           </View>
           <View style={styles.grid}>
             {specs.map(([icon, k, v], i) => (

@@ -54,7 +54,7 @@ export default function Explore() {
           <ScalePressable key={d.id} testID={`dest-${d.id}`} accessibilityRole="button" accessibilityLabel={d.name} onPress={() => router.push(`/destination/${d.id}`)}>
             <ImageBackground source={images[d.image]} style={styles.dest} imageStyle={{ borderRadius: 18 }}>
               <LinearGradient colors={colors.photoFade} style={[StyleSheet.absoluteFill, { borderRadius: 18 }]} />
-              <T variant="label" style={{ color: colors.white, fontFamily: font.bold }}>{d.name}</T>
+              <T variant="label" numberOfLines={1} style={{ color: colors.white, fontFamily: font.bold }}>{d.name}</T>
               <T variant="caption" style={{ color: 'rgba(255,255,255,0.9)' }}>{d.fleet} boats</T>
             </ImageBackground>
           </ScalePressable>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   badge: { position: 'absolute', top: 10, right: 11, width: 8, height: 8, borderRadius: 4, backgroundColor: colors.brass, borderWidth: 1.5, borderColor: colors.surface },
   search: { marginTop: 16, flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.surface, borderRadius: radius.pill, padding: 8, paddingRight: 10, ...shadow },
   searchIcon: { width: 40, height: 40, borderRadius: 20, backgroundColor: colors.surfaceAlt, alignItems: 'center', justifyContent: 'center' },
-  dest: { width: 112, height: 140, justifyContent: 'flex-end', padding: 10 },
+  dest: { width: 128, height: 148, justifyContent: 'flex-end', padding: 10 },
   featured: { height: 260, justifyContent: 'flex-end', padding: 16 },
   save: { position: 'absolute', top: 12, right: 12, width: 36, height: 36, borderRadius: 18, backgroundColor: 'rgba(24,22,20,0.45)', alignItems: 'center', justifyContent: 'center' },
   near: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, marginBottom: 12 },

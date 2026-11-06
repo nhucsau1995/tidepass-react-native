@@ -56,7 +56,7 @@ export default function Confirmed() {
             <Tag label="Verified booking" tone="brass" icon="check-circle" />
           </View>
           <View style={styles.ref}>
-            <T variant="title" testID="booking-ref" num style={{ fontFamily: font.bold, fontSize: 22, letterSpacing: 1, flex: 1 }}>{b.id}</T>
+            <T variant="title" testID="booking-ref" num numberOfLines={1} adjustsFontSizeToFit style={{ fontFamily: font.bold, fontSize: 20, letterSpacing: 0.5, flex: 1 }}>{b.id}</T>
             <Button small kind="secondary" icon="copy" label="Copy" onPress={() => showToast(`${b.id} copied`)} />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 10 }}>
@@ -87,9 +87,11 @@ export default function Confirmed() {
           </View>
         </Card>
 
-        <Button testID="view-booking" label="View booking" trailing="arrow-right" onPress={() => router.replace(`/booking/${b.id}?from=confirmed`)} style={{ marginTop: 20 }} />
-        <Button kind="secondary" icon="calendar" label="Add to calendar" onPress={() => showToast('Added to your calendar')} style={{ marginTop: 12 }} />
       </ScrollView>
+      <View style={[styles.foot, { paddingBottom: Math.max(insets.bottom, 12) + 4 }]}>
+        <Button kind="secondary" icon="calendar" label="Calendar" onPress={() => showToast('Added to your calendar')} style={{ flex: 1 }} />
+        <Button testID="view-booking" label="View booking" trailing="arrow-right" onPress={() => router.replace(`/booking/${b.id}?from=confirmed`)} style={{ flex: 1.4 }} />
+      </View>
     </View>
   );
 }
@@ -99,5 +101,6 @@ const styles = StyleSheet.create({
   hero: { alignItems: 'center', padding: 22, borderRadius: radius.card, borderWidth: 1, borderColor: colors.border },
   check: { width: 64, height: 64, borderRadius: 32, alignItems: 'center', justifyContent: 'center' },
   ref: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 12, borderWidth: 1, borderColor: colors.border, borderRadius: 14, padding: 14 },
+  foot: { flexDirection: 'row', gap: 10, paddingHorizontal: 20, paddingTop: 12, borderTopWidth: 1, borderTopColor: colors.border, backgroundColor: colors.surface },
   rowIcon: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.surfaceAlt, alignItems: 'center', justifyContent: 'center' },
 });
